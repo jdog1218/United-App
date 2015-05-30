@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">United</string>
+
+    <string name="shane">Shane Rouland</string>
+    <string name="Sermons">Sermons</string>
+    <string name="bible">Bible</string>
+    <string name="settings">Settings</string>
+    <string name="text_of_activity_main">Welcome to the United APP</string>
+    <string name="Button">This is a button</string>
+</resources>
