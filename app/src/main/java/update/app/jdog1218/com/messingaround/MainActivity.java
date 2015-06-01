@@ -124,6 +124,9 @@ public class MainActivity extends Activity {
 
     public void sotd(MenuItem item) {
         Intent clickedSotd = new Intent(this, Sotd.class);
+        int result = 1;
+        startActivity(clickedSotd);
+
     }
 }
 

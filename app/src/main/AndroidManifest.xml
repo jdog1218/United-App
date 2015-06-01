@@ -25,6 +25,11 @@
         <activity android:name= ".bible"
             android:label="getBible"
             android:theme="@style/AppTheme"/>
+        <activity
+            android:name=".Sotd"
+            android:label="Sotdcall"
+            android:theme="@style/AppTheme" />
+
     </application>
 
 
