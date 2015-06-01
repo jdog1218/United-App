@@ -56,8 +56,7 @@ public class MainActivity extends Activity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
-        }
-        else if (id == R.id.exit) {
+        } else if (id == R.menu.menu_main) {
             finish();
             return true;
 
