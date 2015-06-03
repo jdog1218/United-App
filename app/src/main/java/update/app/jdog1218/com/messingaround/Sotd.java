@@ -4,12 +4,15 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.PersistableBundle;
+import android.view.Menu;
+import android.widget.TextView;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.w3c.dom.Node;
+import org.w3c.dom.Text;
 
 import java.io.IOException;
 
@@ -28,8 +31,10 @@ public class Sotd extends Activity {
         super.onCreate(savedInstanceState, persistentState);
         setContentView(R.layout.sotd);
         Intent activityThatCalled = getIntent();
+        startActivity(activityThatCalled);
 
     }
+
 
     /**
      * Pull and Parse the HTML of Compass HB for SOTD.
@@ -37,18 +42,18 @@ public class Sotd extends Activity {
      * @return DocumentString
      * @throws IOException
      */
-    public String pullHTML() throws IOException {
+    public void pullHTML() throws IOException {
         String url = "https://www.compasshb.com/api/v1/passages";
         Document doc = null;
+        Text textView = (Text) findViewById(R.id.SOTD);
         try {
             doc = Jsoup.connect(url).get();
+            title = doc.title();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        title = doc.title();
-        String text = doc.body().text();
+        textView.appendData(doc.body().text());
 
-        return text;
     }
 
 

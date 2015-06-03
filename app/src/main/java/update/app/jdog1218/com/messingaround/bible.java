@@ -26,13 +26,5 @@ public class bible extends Activity {
 
     }
 
-    public void sendUserNextPage(View view) {
-        EditText usernameET = (EditText) findViewById(R.id.edit_txt);
-        String userName = String.valueOf(usernameET.getText());
-        Intent goingBack = new Intent();
 
-        goingBack.putExtra("UserName", userName);
-        setResult(RESULT_OK, goingBack);
-        finish();
-    }
 }

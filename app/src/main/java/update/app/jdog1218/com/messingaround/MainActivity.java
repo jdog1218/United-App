@@ -29,7 +29,7 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
         RelativeLayout bible = new RelativeLayout(this);
         answer_Button = (Button) findViewById(R.id.go_button);
-        bible.addView(answer_Button);
+
 
         setContentView(bible);
 
@@ -66,7 +66,7 @@ public class MainActivity extends Activity {
     }
 
     public void getButton_Response(View view){
-        String userName = String.valueOf(R.id.edit_txt);
+        String userName = String.valueOf(R.id.go_button);
         String yourYesResponse = "That is great " + userName;
         Toast.makeText(this,yourYesResponse,Toast.LENGTH_SHORT).show();
     }
@@ -87,7 +87,7 @@ public class MainActivity extends Activity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        TextView userNameMessage = (TextView) findViewById(R.id.edit_txt);
+        TextView userNameMessage = (TextView) findViewById(R.id.go_button);
 
         String nameSentBack = data.getStringExtra("UsersName");
         userNameMessage.append(" " + nameSentBack);
@@ -123,7 +123,9 @@ public class MainActivity extends Activity {
 
     public void sotd(MenuItem item) {
         Intent clickedSotd = new Intent(this, Sotd.class);
+
         int result = 1;
+
         startActivity(clickedSotd);
 
     }
