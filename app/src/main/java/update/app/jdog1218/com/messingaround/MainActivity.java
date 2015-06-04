@@ -3,20 +3,30 @@ package update.app.jdog1218.com.messingaround;
 import android.app.Activity;
 import android.app.DialogFragment;
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+
+import java.io.IOException;
 import java.net.URL;
 import java.net.URLConnection;
+
+import static update.app.jdog1218.com.messingaround.R.drawable.the_rendered_background;
 
 
 public class MainActivity extends Activity {
@@ -27,9 +37,10 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        RelativeLayout bible = new RelativeLayout(this);
+        LinearLayout bible = new LinearLayout(this);
 
-
+        ImageView image = (ImageView) findViewById(R.id.background);
+        image.setAlpha(125);
 
     }
 
@@ -47,7 +58,6 @@ public class MainActivity extends Activity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-
 
         return super.onOptionsItemSelected(item);
     }

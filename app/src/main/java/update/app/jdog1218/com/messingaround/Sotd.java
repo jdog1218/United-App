@@ -37,12 +37,25 @@ public class Sotd extends Activity {
     public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
         super.onCreate(savedInstanceState, persistentState);
         setContentView(R.layout.sotd);
-        Intent activityThatCalled = getIntent();
+        final String url = "https://www.compasshb.com/api/v1/passages";
+        Document doc = null;
+        Element element = null;
+        TextView textView = (TextView) findViewById(R.id.SOTD);
+        try {
+            doc = Jsoup.connect(url).get().clone();
+            String paragraph = doc.title();
+            element = doc.select("div").first();
+            textView.setText(element.html());
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -56,20 +69,19 @@ public class Sotd extends Activity {
         super.onStart();
         final String url = "https://www.compasshb.com/api/v1/passages";
         Document doc = null;
+        Element element = null;
         TextView textView = (TextView) findViewById(R.id.SOTD);
         try {
-            doc = Jsoup.connect(url).get();
-            textView.setText(doc.ownText());
+            doc = Jsoup.connect(url).get().clone();
             String paragraph = doc.title();
-
+            element = doc.select("div").first();
+            textView.setText(element.html());
 
             return paragraph;
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         return null;
-
     }
 
     @Override

@@ -32,7 +32,9 @@
             android:name=".Sotd"
             android:label="Sotd"
             android:theme="@style/AppTheme"
-            android:permission="Internet" />
+            android:permission="Internet"
+            android:allowEmbedded="true"
+            android:hardwareAccelerated="true" />
 
 
     </application>
