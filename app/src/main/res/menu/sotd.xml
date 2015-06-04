@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/bible"
+        android:title="@string/bible"
+        android:orderInCategory="1"
+        android:showAsAction="always"
+        android:icon="@drawable/bible"
+        android:onClick="gotoInbeddedBible" />
+    <item
+        android:id="@+id/Home"
+        android:title="Home"
+        android:orderInCategory="2"
+        android:showAsAction="always" />
+    <item
+        android:id="@+id/submit"
+        android:title="exit"
+        android:onClick="exit"
+        android:orderInCategory="220" />
+</menu>
