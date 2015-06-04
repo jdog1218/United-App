@@ -2,15 +2,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".MainActivity">
 
-    <item
-        android:id="@+id/action_settings"
-        android:title="@string/settings"
-        android:orderInCategory="100"
-        android:showAsAction="never"
-        android:onClick="gotoSetting"
-        />
 
-    <item
+<item
         android:title="@string/bible"
         android:id="@+id/bible"
         android:visible="true"
@@ -18,24 +11,6 @@
         android:showAsAction="ifRoom|withText"
         android:icon="@drawable/bible"
         android:onClick="gotoInbeddedBible"
-        />
-    <item
-        android:id="@+id/Video"
-        android:title="@string/Sermons"
-        android:visible="true"
-        android:orderInCategory="3"
-        android:showAsAction="ifRoom|withText"
-        android:onClick="sendtovideos"
-        />
-    <item
-        android:id="@+id/youtube_channel"
-        android:visible="true"
-        android:orderInCategory="50"
-        android:enabled="true"
-        android:title="Youtube"
-        android:showAsAction="ifRoom|withText"
-        android:icon="@drawable/youtube_2"
-        android:onClick="sendtoYoutube"
         />
     <item
         android:id="@+id/submit"

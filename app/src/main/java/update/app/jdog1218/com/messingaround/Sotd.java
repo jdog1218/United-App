@@ -42,17 +42,18 @@ public class Sotd extends Activity {
      * @return DocumentString
      * @throws IOException
      */
-    public void pullHTML() throws IOException {
-        String url = "https://www.compasshb.com/api/v1/passages";
+    public void pullHTML() {
+        final String url = "https://www.compasshb.com/api/v1/passages";
         Document doc = null;
         Text textView = (Text) findViewById(R.id.SOTD);
         try {
             doc = Jsoup.connect(url).get();
+            textView.appendData(doc.ownText());
             title = doc.title();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        textView.appendData(doc.body().text());
+
 
     }
 

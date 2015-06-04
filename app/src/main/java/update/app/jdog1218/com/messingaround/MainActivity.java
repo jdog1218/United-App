@@ -65,12 +65,6 @@ public class MainActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void getButton_Response(View view){
-        String userName = String.valueOf(R.id.go_button);
-        String yourYesResponse = "That is great " + userName;
-        Toast.makeText(this,yourYesResponse,Toast.LENGTH_SHORT).show();
-    }
-
     public void gotoInbeddedBible(MenuItem item) {
         Intent bibleclass = new Intent(this, bible.class);
 
@@ -87,32 +81,6 @@ public class MainActivity extends Activity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        TextView userNameMessage = (TextView) findViewById(R.id.go_button);
-
-        String nameSentBack = data.getStringExtra("UsersName");
-        userNameMessage.append(" " + nameSentBack);
-    }
-
-    public void sendUserNextPage(View view) {
-        Intent button_Click = new Intent(this, bible.class);
-
-        final int result = 1;
-
-        button_Click.putExtra("called", "MainActvity");
-    }
-
-    public void gotoSetting(MenuItem item) {
-        Intent setting = new Intent(this, Settings.class);
-
-    }
-
-    public void sendtovideos(MenuItem item) {
-        Intent clickedVideos = new Intent(this, Videos.class);
-        clickedVideos.putExtra("Pulled Content", Youtube.class);
-    }
-
-    public void sendtoYoutube(MenuItem item) {
-        Intent clickedYoutube = new Intent(this, Youtube.class);
     }
 
     public void exit(MenuItem item) {
