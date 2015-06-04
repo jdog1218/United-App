@@ -2,12 +2,14 @@ package update.app.jdog1218.com.messingaround;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.view.Menu;
 import android.widget.TextView;
 
 import org.jsoup.Jsoup;
+import org.jsoup.Connection;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -24,6 +26,11 @@ import static org.jsoup.Jsoup.*;
 public class Sotd extends Activity {
 
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+    }
+
     String title;
 
     @Override
@@ -31,10 +38,13 @@ public class Sotd extends Activity {
         super.onCreate(savedInstanceState, persistentState);
         setContentView(R.layout.sotd);
         Intent activityThatCalled = getIntent();
-        startActivity(activityThatCalled);
 
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        return super.onCreateOptionsMenu(menu);
+    }
 
     /**
      * Pull and Parse the HTML of Compass HB for SOTD.
@@ -42,20 +52,28 @@ public class Sotd extends Activity {
      * @return DocumentString
      * @throws IOException
      */
-    public void pullHTML() {
+    protected String pullHTML() {
+        super.onStart();
         final String url = "https://www.compasshb.com/api/v1/passages";
         Document doc = null;
-        Text textView = (Text) findViewById(R.id.SOTD);
+        TextView textView = (TextView) findViewById(R.id.SOTD);
         try {
             doc = Jsoup.connect(url).get();
-            textView.appendData(doc.ownText());
-            title = doc.title();
+            textView.setText(doc.ownText());
+            String paragraph = doc.title();
+
+
+            return paragraph;
         } catch (IOException e) {
             e.printStackTrace();
         }
 
+        return null;
 
     }
 
-
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+    }
 }

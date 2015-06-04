@@ -28,10 +28,7 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         RelativeLayout bible = new RelativeLayout(this);
-        answer_Button = (Button) findViewById(R.id.go_button);
 
-
-        setContentView(bible);
 
 
     }
@@ -50,17 +47,7 @@ public class MainActivity extends Activity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        DialogFragment myfragment = new DialogFragment();
-        myfragment.show(getFragmentManager(), "The Best Cancel");
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        } else if (id == R.menu.menu_main) {
-            finish();
-            return true;
 
-        }
 
         return super.onOptionsItemSelected(item);
     }
