@@ -39,8 +39,8 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
         LinearLayout bible = new LinearLayout(this);
 
-        ImageView image = (ImageView) findViewById(R.id.background);
-        image.setAlpha(125);
+        //ImageView image = (ImageView) findViewById(R.id.background);
+        //image.setAlpha(125);
 
     }
 
@@ -62,15 +62,20 @@ public class MainActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void gotoInbeddedBible(MenuItem item) {
+    /*public void gotoInbeddedBible(MenuItem item) {
         Intent bibleclass = new Intent(this, bible.class);
 
-        final int result = 1;
-
-        bibleclass.putExtra("callingActivity", "MainActivity");
-
         startActivity(bibleclass);
-        startActivityForResult(bibleclass, result);
+
+
+    }*/
+
+    public void sotd(MenuItem item) {
+        Intent clickedSotd = new Intent(this, Sotd.class);
+
+        int result = 1;
+
+        startActivity(clickedSotd);
 
     }
 
@@ -86,13 +91,6 @@ public class MainActivity extends Activity {
         System.exit(1);
     }
 
-    public void sotd(MenuItem item) {
-        Intent clickedSotd = new Intent(this, Sotd.class);
 
-        int result = 1;
-
-        startActivity(clickedSotd);
-
-    }
 }
 

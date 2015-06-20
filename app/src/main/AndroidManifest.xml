@@ -25,9 +25,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name= ".bible"
-            android:label="getBible"
-            android:theme="@style/AppTheme"/>
+
         <activity
             android:name=".Sotd"
             android:label="Sotd"

@@ -1,91 +1,89 @@
 package update.app.jdog1218.com.messingaround;
 
-import android.app.Activity;
-import android.content.Intent;
-import android.os.AsyncTask;
-import android.os.Bundle;
-import android.os.PersistableBundle;
-import android.view.Menu;
-import android.widget.TextView;
-
-import org.jsoup.Jsoup;
-import org.jsoup.Connection;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
-import org.w3c.dom.Node;
-import org.w3c.dom.Text;
-
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.util.List;
 
-import static org.jsoup.Jsoup.*;
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.utils.URLEncodedUtils;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EntityUtils;
 
-/*
- * Created by Joel on 5/28/2015.
- */
-public class Sotd extends Activity {
+public class Sotd {
 
+    static String response = null;
+    public final static int GET = 1;
+    public final static int POST = 2;
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-    }
+    public Sotd() {
 
-    String title;
-
-    @Override
-    public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
-        super.onCreate(savedInstanceState, persistentState);
-        setContentView(R.layout.sotd);
-        final String url = "https://www.compasshb.com/api/v1/passages";
-        Document doc = null;
-        Element element = null;
-        TextView textView = (TextView) findViewById(R.id.SOTD);
-        try {
-            doc = Jsoup.connect(url).get().clone();
-            String paragraph = doc.title();
-            element = doc.select("div").first();
-            textView.setText(element.html());
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-
-        return super.onCreateOptionsMenu(menu);
     }
 
     /**
-     * Pull and Parse the HTML of Compass HB for SOTD.
+     * Making service call
      *
-     * @return DocumentString
-     * @throws IOException
+     * @url - url to make request
+     * @method - http request method
      */
-    protected String pullHTML() {
-        super.onStart();
-        final String url = "https://www.compasshb.com/api/v1/passages";
-        Document doc = null;
-        Element element = null;
-        TextView textView = (TextView) findViewById(R.id.SOTD);
-        try {
-            doc = Jsoup.connect(url).get().clone();
-            String paragraph = doc.title();
-            element = doc.select("div").first();
-            textView.setText(element.html());
+    public String makeServiceCall(String url, int method) {
+        return this.makeServiceCall(url, method, null);
+    }
 
-            return paragraph;
+    /**
+     * Making service call
+     *
+     * @url - url to make request
+     * @method - http request method
+     * @params - http request params
+     */
+    public String makeServiceCall(String url, int method,
+                                  List<NameValuePair> params) {
+        try {
+            // http client
+            DefaultHttpClient httpClient = new DefaultHttpClient();
+            HttpEntity httpEntity = null;
+            HttpResponse httpResponse = null;
+
+            // Checking http request method type
+            if (method == POST) {
+                HttpPost httpPost = new HttpPost(url);
+                // adding post params
+                if (params != null) {
+                    httpPost.setEntity(new UrlEncodedFormEntity(params));
+                }
+
+                httpResponse = httpClient.execute(httpPost);
+
+            } else if (method == GET) {
+                // appending params to url
+                if (params != null) {
+                    String paramString = URLEncodedUtils
+                            .format(params, "utf-8");
+                    url += "?" + paramString;
+                }
+                HttpGet httpGet = new HttpGet(url);
+
+                httpResponse = httpClient.execute(httpGet);
+
+            }
+            httpEntity = httpResponse.getEntity();
+            response = EntityUtils.toString(httpEntity);
+
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (ClientProtocolException e) {
+            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return null;
-    }
 
-    @Override
-    protected void onPostResume() {
-        super.onPostResume();
+        return response;
+
     }
 }

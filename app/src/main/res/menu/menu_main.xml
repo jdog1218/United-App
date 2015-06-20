@@ -3,23 +3,14 @@
     tools:context=".MainActivity">
 
 
-<item
-        android:title="@string/bible"
-        android:id="@+id/bible"
-        android:visible="true"
-        android:orderInCategory="1"
-        android:showAsAction="ifRoom|withText"
-        android:icon="@drawable/bible"
-        android:onClick="gotoInbeddedBible"
-        />
     <item
         android:id="@+id/submit"
-        android:title="exit"
+        android:title="@string/Exit_call"
         android:onClick="exit"
         android:orderInCategory="220" />
     <item
         android:id="@+id/SOTD"
-        android:title="SOTD"
+        android:title="@string/sotd_call"
         android:onClick="sotd"
         />
 </menu>
