@@ -22,15 +22,13 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
+
 public class Sotd extends Activity {
 
-    static String url = "https://www.compasshb.com/api/v1/passages";
-
-    static String stockSymbol;
-    static String stockTitle;
-    static String stockBody;
-    static String verse;
-    static String end;
+    static String sotd;
+    static TextView textView;
 
     MyAsyncTask asyncTask;
 
@@ -44,92 +42,22 @@ public class Sotd extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sotd);
 
-        new MyAsyncTask().doInBackground();
+        textView = (TextView) findViewById(R.id.body);
+
+        new MyAsyncTask().execute();
+        textView.setText(sotd);
     }
 
     public class MyAsyncTask extends AsyncTask<String, String, String> {
         protected String doInBackground(String... Prams) {
 
-            DefaultHttpClient httpclient = new DefaultHttpClient(new BasicHttpParams());
+            EasyHttpClient client = new EasyHttpClient();
 
-            HttpPost httppost = new HttpPost(url);
-
-            httppost.setHeader("Content-type", "application/json");
-
-            InputStream inputStream = null;
-
-            String result = null;
-
-            try {
-
-                HttpResponse response = httpclient.execute(httppost);
-                HttpEntity entity = response.getEntity();
-                inputStream = entity.getContent();
-                BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"), 8);
-                StringBuilder theStringBuilder = new StringBuilder();
-
-                String line = null;
-                while ((line = reader.readLine()) != null) {
-
-                    theStringBuilder.append(line + "\n");
-                }
-                result = theStringBuilder.toString();
-            } catch (Exception e) {
-                e.printStackTrace();
-            } finally {
-                try {
-                    if (inputStream != null) inputStream.close();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-
-            JSONObject jsonObject;
-
-            try {
-                //Log.v("JsonParser Result ", result);
-
-                jsonObject = new JSONObject(result);
-
-                JSONObject jsonTitle = jsonObject.getJSONObject("title");
-
-                stockTitle = jsonTitle.getString("title");
-
-                JSONObject html = jsonObject.getJSONObject("verses");
-
-                stockBody = html.getString("verses");
-
-                Document doc = Jsoup.parse(stockBody);
-
-                Elements body = doc.getElementsByClass("esv");
-
-                stockBody = body.text();
-
-            } catch (JSONException e) {
-                e.printStackTrace();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-            return result;
+            sotd = client.get("https://www.compasshb.com/api/v1/passages");
+            //textView.setText(sotd);
+            return sotd;
         }
 
-
-        @Override
-        protected void onPostExecute(String result) {
-            TextView title = (TextView) findViewById(R.id.text_view);
-            TextView body = (TextView) findViewById(R.id.body);
-
-            title.setText("Title: " + stockTitle);
-            body.setText("body: " + stockBody);
-        }
     }
-
-    public String makeServiceCall(String url, int method) {
-
-
-        return this.makeServiceCall(url, method);
-    }
-
 
 }
