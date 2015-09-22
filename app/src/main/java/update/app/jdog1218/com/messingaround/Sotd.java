@@ -5,31 +5,17 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.widget.TextView;
 
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.concurrent.ExecutionException;
 
-import android.os.AsyncTask;
-
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.params.BasicHttpParams;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.select.Elements;
-
-import javax.net.ssl.TrustManager;
-import javax.net.ssl.X509TrustManager;
 
 public class Sotd extends Activity {
 
     static String sotd, content;
-    static TextView textView;
+
 
     MyAsyncTask asyncTask;
 
@@ -42,9 +28,7 @@ public class Sotd extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sotd);
-
-        textView = (TextView) findViewById(R.id.body);
-
+        TextView textView = (TextView) findViewById(R.id.body);
         asyncTask = new MyAsyncTask();
         asyncTask.execute();
         try {
@@ -54,6 +38,12 @@ public class Sotd extends Activity {
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
+        try {
+            content = ParseHTML(content);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        textView.setText(content);
     }
 
     public class MyAsyncTask extends AsyncTask<String, String, String> {
@@ -68,9 +58,15 @@ public class Sotd extends Activity {
 
     }
 
-    public String ParseHTML() {
-        Jsoup jsoupclass;
+    public String ParseHTML(String content) throws JSONException {
+        JSONObject obj = new JSONObject(content);
+        try {
+            String body = obj.getJSONObject("body").getString("body");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
+        return content;
 
     }
 
