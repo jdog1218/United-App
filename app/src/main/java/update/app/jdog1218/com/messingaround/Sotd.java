@@ -8,6 +8,7 @@ import android.widget.TextView;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.concurrent.ExecutionException;
 
 import android.os.AsyncTask;
 
@@ -27,7 +28,7 @@ import javax.net.ssl.X509TrustManager;
 
 public class Sotd extends Activity {
 
-    static String sotd;
+    static String sotd, content;
     static TextView textView;
 
     MyAsyncTask asyncTask;
@@ -44,8 +45,15 @@ public class Sotd extends Activity {
 
         textView = (TextView) findViewById(R.id.body);
 
-        new MyAsyncTask().execute();
-        textView.setText(sotd);
+        asyncTask = new MyAsyncTask();
+        asyncTask.execute();
+        try {
+            content = asyncTask.get();
+        } catch (InterruptedException e) {
+
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
     }
 
     public class MyAsyncTask extends AsyncTask<String, String, String> {
@@ -57,6 +65,12 @@ public class Sotd extends Activity {
             //textView.setText(sotd);
             return sotd;
         }
+
+    }
+
+    public String ParseHTML() {
+        Jsoup jsoupclass;
+
 
     }
 
