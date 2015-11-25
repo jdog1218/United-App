@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "update.app.jdog1218.com.messingaround"
-        minSdkVersion 11
+        minSdkVersion 1
         targetSdkVersion 22
         versionCode 1
         versionName "1.0"

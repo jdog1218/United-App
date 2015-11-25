@@ -6,19 +6,20 @@
     android:orientation="vertical"
     android:gravity="center"
     android:padding="20dp"
-    tools:context=".Sotd"
+    tools:context="@+id/title"
     android:background="@drawable/the_rendered_background"
-    android:alpha=".85">
+    android:weightSum="1">
 
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/text_view" />
-
-    <TextView
+    <ScrollView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:id="@+id/body" />
+        android:layout_weight="0.44">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/text_view" />
+
+    </ScrollView>
+
 </LinearLayout>
 

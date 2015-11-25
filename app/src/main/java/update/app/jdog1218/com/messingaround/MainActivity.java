@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -32,12 +34,17 @@ import static update.app.jdog1218.com.messingaround.R.drawable.the_rendered_back
 public class MainActivity extends Activity {
 
     private Button answer_Button;
-
+    private WebView mWebView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        mWebView = (WebView) findViewById(R.id.webView);
+        // Enable Javascript
+        WebSettings webSettings = mWebView.getSettings();
+        webSettings.setJavaScriptEnabled(true);
+        mWebView.loadUrl("https://m.youtube.com/channel/UCdj4UALMh0tY2vJe1SKZGgw/feed");
         //ImageView image = (ImageView) findViewById(R.id.background);
         //image.setAlpha(125);
 

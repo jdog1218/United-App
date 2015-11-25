@@ -4,7 +4,7 @@
     package="update.app.jdog1218.com.messingaround" >
 
     <uses-sdk
-        android:minSdkVersion="9"
+        android:minSdkVersion="1"
         android:targetSdkVersion="19"
         />
     <uses-permission android:name="android.permission.INTERNET" />
